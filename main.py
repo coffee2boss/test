@@ -8,11 +8,11 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("white")
 screen.tracer(0)
+
+
 scoreboard = Scoreboard()
 player = Player()
-
-#for cars in range():
-cars = CarManager()
+car_manager = CarManager()
 
 
 screen.listen()
@@ -23,10 +23,10 @@ while game_is_on:
     time.sleep(.1)
     screen.update()
 
-    # create cars 2 MOVE 
-    cars.move()
+    # create cars 2 MOVE by 5 paces
+    car_manager.create_car()
+    car_manager.move_cars()
     
-
     # goal on scoreboard
     if player.ycor() == 280:
         player.goto(STARTING_POSITION)
@@ -34,7 +34,8 @@ while game_is_on:
         scoreboard.update_scoreboard()
 
     # turtle gets run over
-    if player.distance(cars) < 10:
+    for car in car_manager.all_cars:        # including all cars in the list with the turtle.
+     if car.distance(player) < 20:
         game_is_on = False
         scoreboard.game_over()
     

@@ -1,28 +1,28 @@
 from turtle import Turtle
 import random
 
-Y_POSITIONS = [270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50 ,40, 30, 20, 10, 0, -250, -240, -230, -220, -210, -200, -190, -180, -170, -160, -150, -140, -130, -120, -110, -100, -90, -80, -70, -60, -50 ,-40, -30, -20, -10 ]
-Y_POS = random.choice(Y_POSITIONS)
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DIST = 5
 MOVE_INCREMENT = 10
 
-class CarManager(Turtle):
+class CarManager:
          def __init__(self):
-        
-            super().__init__()
-            self.color(random.choice(COLORS))
-            self.shape("square")
-            self.penup()
-            self.speed("slowest")
-            self.setheading(180)
-            self.goto(300 ,Y_POS)
-            self.move()
+            self.all_cars = []
             
+         def create_car(self):
+            random_chance = random.randint(1,6)
+            if random_chance ==1:
+                new_car = Turtle("square")
+                new_car.color(random.choice(COLORS))
+                new_car.shapesize(stretch_wid=1, stretch_len=2 )
+                new_car.penup()
+                random_y = random.randint(-250,250)
+                new_car.goto(300 , random_y)
+                self.all_cars.append(new_car)
         
 
-         def move(self):
-            #for _ in range(MOVE_INCREMENT):                
-            self.forward(STARTING_MOVE_DIST)
-                #self.forward(MOVE_INCREMENT)
+         def move_cars(self):
+            for car in self.all_cars:                
+             car.backward(STARTING_MOVE_DIST)
+               
             
